@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-![Project Pipeline](https://github.com/akashmailar/Walmart-Sales-Analysis-Python-SQL/blob/main/Walmart-Project.png)
+![Project Pipeline](https://github.com/akashmailar/Walmart-Sales-Analysis-Python-SQL/blob/main/Walmart%20Project.png)
 
 
 This project is an end-to-end data analysis solution designed to extract critical business insights from Walmart sales data. We utilize Python for data processing and analysis, SQL for advanced querying, and structured problem-solving techniques to solve key business questions. The project is ideal for data analysts looking to develop skills in data manipulation, SQL querying, and data pipeline creation.
@@ -29,7 +29,7 @@ This project is an end-to-end data analysis solution designed to extract critica
 ### 4. Install Required Libraries and Load Data
    - **Libraries**: Install necessary Python libraries using:
      ```bash
-     pip install pandas numpy sqlalchemy mysql-connector-python psycopg2
+     pip install pandas numpy sqlalchemy mysql-connector-python
      ```
    - **Loading Data**: Read the data into a Pandas DataFrame for initial analysis and transformations.
 
@@ -40,7 +40,7 @@ This project is an end-to-end data analysis solution designed to extract critica
 ### 6. Data Cleaning
    - **Remove Duplicates**: Identify and remove duplicate entries to avoid skewed results.
    - **Handle Missing Values**: Drop rows or columns with missing values if they are insignificant; fill values where essential.
-   - **Fix Data Types**: Ensure all columns have consistent data types (e.g., dates as `datetime`, prices as `float`).
+   - **Fix Data Types**: Ensure all columns have consistent data types (e.g., dates as `datetime`, prices as `float`.
    - **Currency Formatting**: Use `.replace()` to handle and format currency values for analysis.
    - **Validation**: Check for any remaining inconsistencies and verify the cleaned data.
 
@@ -48,9 +48,9 @@ This project is an end-to-end data analysis solution designed to extract critica
    - **Create New Columns**: Calculate the `Total Amount` for each transaction by multiplying `unit_price` by `quantity` and adding this as a new column.
    - **Enhance Dataset**: Adding this calculated field will streamline further SQL analysis and aggregation tasks.
 
-### 8. Load Data into MySQL and PostgreSQL
-   - **Set Up Connections**: Connect to MySQL and PostgreSQL using `sqlalchemy` and load the cleaned data into each database.
-   - **Table Creation**: Set up tables in both MySQL and PostgreSQL using Python SQLAlchemy to automate table creation and data insertion.
+### 8. Load Data into MySQL
+   - **Set Up Connections**: Connect to MySQL using `sqlalchemy` and load the cleaned data into each database.
+   - **Table Creation**: Set up tables in both MySQL using Python SQLAlchemy to automate table creation and data insertion.
    - **Verification**: Run initial SQL queries to confirm that the data has been loaded accurately.
 
 ### 9. SQL Analysis: Complex Queries and Business Problem Solving
@@ -61,6 +61,16 @@ This project is an end-to-end data analysis solution designed to extract critica
      - Analyzing peak sales periods and customer buying patterns.
      - Profit margin analysis by branch and category.
    - **Documentation**: Keep clear notes of each query's objective, approach, and results.
+   - **SQL Solved Queries**:
+        - **Q1. Find different payment methods and number of transactions, number of quantities sold.**
+          ```sql
+               SELECT 
+	                payment_method, 
+                   COUNT(*) as no_of_transactions,
+                   SUM(quantity) as qty_sold
+               FROM walmart_database.walmart
+               GROUP BY payment_method;
+          ```
 
 ### 10. Project Publishing and Documentation
    - **Documentation**: Maintain well-structured documentation of the entire process in Markdown or a Jupyter Notebook.
@@ -75,9 +85,9 @@ This project is an end-to-end data analysis solution designed to extract critica
 ## Requirements
 
 - **Python 3.8+**
-- **SQL Databases**: MySQL, PostgreSQL
+- **SQL Databases**: MySQL
 - **Python Libraries**:
-  - `pandas`, `numpy`, `sqlalchemy`, `mysql-connector-python`, `psycopg2`
+  - `pandas`, `numpy`, `sqlalchemy`, `mysql-connector-python`
 - **Kaggle API Key** (for data downloading)
 
 ## Getting Started
@@ -102,7 +112,7 @@ This project is an end-to-end data analysis solution designed to extract critica
 |-- notebooks/                # Jupyter notebooks for Python analysis
 |-- README.md                 # Project documentation
 |-- requirements.txt          # List of required Python libraries
-|-- main.py                   # Main script for loading, cleaning, and processing data
+|-- project.py                # Main script for loading, cleaning, and processing data
 ```
 ---
 
