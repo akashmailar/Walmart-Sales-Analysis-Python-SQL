@@ -67,9 +67,9 @@ This project is an end-to-end data analysis solution designed to extract critica
 - **Q1. Find different payment methods and number of transactions, number of quantities sold.**
 ```sql
 SELECT 
-    payment_method, 
-    COUNT(*) as no_of_transactions,
-    SUM(quantity) as qty_sold
+	payment_method, 
+	COUNT(*) as no_of_transactions,
+	SUM(quantity) as qty_sold
 FROM walmart_database.walmart
 GROUP BY payment_method;
 ```
@@ -78,14 +78,14 @@ GROUP BY payment_method;
 ```sql
 SELECT *
 FROM
-	(SELECT
-		branch, 
-		category,
-		AVG(rating) as avg_rating,
-		RANK() OVER(PARTITION BY branch ORDER BY AVG(rating) DESC) as ranking
-	FROM walmart_database.walmart 
-	GROUP BY branch, category
-	ORDER BY branch, AVG(rating) DESC) as rating_table
+(SELECT
+	branch, 
+	category,
+	AVG(rating) as avg_rating,
+	RANK() OVER(PARTITION BY branch ORDER BY AVG(rating) DESC) as ranking
+FROM walmart_database.walmart 
+GROUP BY branch, category
+ORDER BY branch, AVG(rating) DESC) as rating_table
 WHERE ranking = 1;
 ```
 
@@ -99,14 +99,14 @@ MODIFY date DATE;
 
 SELECT *
 FROM
-	(SELECT 
-		branch,
-		dayname(date) as day_name,
-		COUNT(payment_method) as no_of_transactions,
-		RANK() OVER(PARTITION BY branch ORDER BY COUNT(payment_method) DESC) as ranking
-	FROM walmart_database.walmart
-	GROUP BY branch, day_name
-	ORDER BY branch, no_of_transactions DESC) as day_ranking
+(SELECT 
+	branch,
+	dayname(date) as day_name,
+	COUNT(payment_method) as no_of_transactions,
+	RANK() OVER(PARTITION BY branch ORDER BY COUNT(payment_method) DESC) as ranking
+FROM walmart_database.walmart
+GROUP BY branch, day_name
+ORDER BY branch, no_of_transactions DESC) as day_ranking
 WHERE ranking = 1;
 ```
 
@@ -114,7 +114,7 @@ WHERE ranking = 1;
 ```sql
 SELECT 
 	payment_method,
-    SUM(quantity) as total_qty
+	SUM(quantity) as total_qty
 FROM walmart_database.walmart
 GROUP BY payment_method
 ORDER BY total_qty DESC;
@@ -124,10 +124,10 @@ ORDER BY total_qty DESC;
 ```sql
 SELECT 
 	city,
-    category,
-    AVG(rating) as avg_rating,
-    MIN(rating) as min_rating,
-    MAX(rating) as max_rating
+	category,
+	AVG(rating) as avg_rating,
+	MIN(rating) as min_rating,
+	MAX(rating) as max_rating
 FROM walmart_database.walmart
 GROUP BY city, category
 ORDER BY city;
@@ -138,7 +138,7 @@ ORDER BY city;
 SELECT 
 	category,
 	SUM(total) as total_revenue,
-    SUM(unit_price * quantity * profit_margin) as total_profit
+	SUM(unit_price * quantity * profit_margin) as total_profit
 FROM walmart_database.walmart
 GROUP BY category
 ORDER BY total_profit DESC;
@@ -148,14 +148,14 @@ ORDER BY total_profit DESC;
 ```sql
 SELECT *
 FROM
-	(SELECT 
-		branch,
-		payment_method,
-		count(payment_method) as total_payments,
-		RANK() OVER(PARTITION BY branch ORDER BY count(payment_method) DESC) as ranking
-	FROM walmart_database.walmart
-	GROUP BY branch, payment_method
-	ORDER BY branch, total_payments DESC) as payments
+(SELECT 
+	branch,
+	payment_method,
+	count(payment_method) as total_payments,
+	RANK() OVER(PARTITION BY branch ORDER BY count(payment_method) DESC) as ranking
+FROM walmart_database.walmart
+GROUP BY branch, payment_method
+ORDER BY branch, total_payments DESC) as payments
 WHERE ranking = 1;
 ```
 
@@ -166,12 +166,12 @@ MODIFY time TIME;
 
 SELECT
 	branch,
-    CASE 
+    	CASE 
 		WHEN hour(time) < 12 THEN 'morning'
-        WHEN hour(time) BETWEEN 12 AND 17 THEN 'afternoon'
-        ELSE 'Evening'
+	        WHEN hour(time) BETWEEN 12 AND 17 THEN 'afternoon'
+        	ELSE 'Evening'
 	END as shifts,
-    COUNT(invoice_id) as no_of_invoices
+    	COUNT(invoice_id) as no_of_invoices
 FROM walmart_database.walmart
 GROUP BY branch, shifts
 ORDER BY branch, no_of_invoices DESC;
@@ -181,7 +181,7 @@ ORDER BY branch, no_of_invoices DESC;
 ```sql
 WITH CTE1 AS (SELECT 
 	branch,
-    SUM(total) as total_sales_2022
+    	SUM(total) as total_sales_2022
 FROM walmart_database.walmart
 WHERE year(date) = 2022
 GROUP BY branch
@@ -189,7 +189,7 @@ ORDER BY branch, total_sales_2022 DESC),
 
 CTE2 AS (SELECT 
 	branch,
-    SUM(total) as total_sales_2023
+    	SUM(total) as total_sales_2023
 FROM walmart_database.walmart
 WHERE year(date) = 2023
 GROUP BY branch
@@ -197,10 +197,10 @@ ORDER BY branch, total_sales_2023 DESC)
 
 SELECT 
 	CTE1.branch, 
-    CTE1.total_sales_2022,
-    CTE2.total_sales_2023,
-    (CTE2.total_sales_2023 - CTE1.total_sales_2022) as revenue_compare,
-    round((CTE1.total_sales_2022 - CTE2.total_sales_2023) / CTE1.total_sales_2022 * 100, 2) as decrease_ratio
+    	CTE1.total_sales_2022,
+    	CTE2.total_sales_2023,
+    	(CTE2.total_sales_2023 - CTE1.total_sales_2022) as revenue_compare,
+    	round((CTE1.total_sales_2022 - CTE2.total_sales_2023) / CTE1.total_sales_2022 * 100, 2) as decrease_ratio
 FROM CTE1 INNER JOIN CTE2
 ON CTE1.branch = CTE2.branch
 ORDER BY decrease_ratio DESC
