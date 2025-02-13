@@ -61,18 +61,20 @@ This project is an end-to-end data analysis solution designed to extract critica
      - Analyzing peak sales periods and customer buying patterns.
      - Profit margin analysis by branch and category.
    - **Documentation**: Keep clear notes of each query's objective, approach, and results.
-   - **SQL Solved Queries**:
-        - **Q1. Find different payment methods and number of transactions, number of quantities sold.**
-          ```sql
-               SELECT 
-	                payment_method, 
-                   COUNT(*) as no_of_transactions,
-                   SUM(quantity) as qty_sold
-               FROM walmart_database.walmart
-               GROUP BY payment_method;
-          ```
 
-### 10. Project Publishing and Documentation
+### 10. SQL Solved Queries:
+- **Q1. Find different payment methods and number of transactions, number of quantities sold.**
+```sql
+SELECT 
+    payment_method, 
+    COUNT(*) as no_of_transactions,
+    SUM(quantity) as qty_sold
+FROM walmart_database.walmart
+GROUP BY payment_method;
+```
+
+
+### 11. Project Publishing and Documentation
    - **Documentation**: Maintain well-structured documentation of the entire process in Markdown or a Jupyter Notebook.
    - **Project Publishing**: Publish the completed project on GitHub or any other version control platform, including:
      - The `README.md` file (this document).
